@@ -1,0 +1,42 @@
+version: "3"
+services:
+  react-ecg:
+    image: ecg-client-v4
+    stdin_open: true
+    ports: 
+      - 8000:8000
+    networks:
+      - mern-app
+    volumes:
+      - ./client:/usr/src/app/client
+      - ./img_folder:/usr/src/app/img_folder
+      
+
+  ecg-server:
+    image: ecg-server-v4
+    ports: 
+      - 3000:3000
+    depends_on:
+      - mongo
+    networks:
+      - mern-app
+    volumes:
+      - ./img_folder:/usr/src/app/img_folder
+      
+
+  mongo:
+    image: mongo
+    ports: 
+      - 27017:27017
+    networks:
+      - mern-app
+    volumes:
+      - mongo-data:/data/db
+
+networks:
+  mern-app:
+    driver: bridge
+
+volumes: 
+  mongo-data:
+    driver: local

@@ -1,0 +1,5 @@
+client/src/img_folder/*.png
+img_folder/*.png
+client/node_modules
+old_img_folder
+.DS_Store
